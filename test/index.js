@@ -4,7 +4,8 @@ import {
     defaultParameterValue,
     returnArgumentsArray,
     returnFnResult,
-    returnCounter
+    returnCounter,
+    bindFunction
 } from '../src/index';
 
 describe('ДЗ 1 - функции', () => {
@@ -84,4 +85,25 @@ describe('ДЗ 1 - функции', () => {
         });
     });
 
+    describe('bindFunction', () => {
+        it('должна возвращать функцию', () => {
+            function fn(a, b) {
+                return a + b;
+            }
+
+            let result = bindFunction(fn);
+
+            assert(typeof result === 'function');
+        });
+
+        it('должна привязывать аргументы возвращаемой функции', () => {
+            function fn(a, b) {
+                return a + b;
+            }
+
+            let result = bindFunction(fn, 10, 20);
+
+            assert(result() === 30);
+        });
+    });
 });
